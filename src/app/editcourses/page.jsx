@@ -8,7 +8,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
 
-const EditCourse = () => {
+const Page = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const courseId = searchParams.get("id");
@@ -114,4 +114,4 @@ const EditCourse = () => {
   );
 };
 
-export default EditCourse;
+export default Page;

@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import { Notyf } from "notyf";
 import 'notyf/notyf.min.css';
 
-const EditStudentPage = () => {
+const Page = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const initialTeacherId = searchParams.get("teacherId") || "";
@@ -160,4 +160,4 @@ const EditStudentPage = () => {
     );
 };
 
-export default EditStudentPage;
+export default Page;
