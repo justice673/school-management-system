@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import style from './page.module.css';
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
 
 function Page() {
   const [showPassword, setShowPassword] = useState(false);
@@ -14,6 +16,9 @@ function Page() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+
+  // Initialize Notyf instance
+  const notyf = new Notyf();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -46,13 +51,16 @@ function Page() {
 
       const result = await res.json();
       if (res.ok) {
+        notyf.success("Registration successful!");
         router.push("/login");
       } else {
         setError(result.message || "Registration failed. Please try again.");
+        notyf.error("Registration failed. Please try again.");
       }
     } catch (error) {
       console.error("An error occurred:", error);
       setError("Something went wrong. Please try again later.");
+      notyf.error("Something went wrong. Please try again later.");
     }
   };
 

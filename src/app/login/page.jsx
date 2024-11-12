@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import style from './page.module.css';
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
 
 function Page() {
   const [showPassword, setShowPassword] = useState(false);
@@ -11,22 +13,23 @@ function Page() {
   const [error, setError] = useState("");
   const router = useRouter();
 
+  // Initialize Notyf instance
+  const notyf = new Notyf();
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); 
+    setError("");
     const userData = {
       email,
       password,
     };
 
-    console.log("Sending data:", userData); 
-
     try {
-      const response = await fetch("https://school-management-system-backend-jzrj.onrender.com/auth/login", {  
+      const response = await fetch("https://school-management-system-backend-jzrj.onrender.com/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,19 +38,21 @@ function Page() {
       });
 
       const data = await response.json();
-      console.log("Response data:", data); 
 
       if (response.ok) {
         if (data.token) {
-          localStorage.setItem("token", data.token); 
-          router.push("/admindashboard"); 
+          localStorage.setItem("token", data.token);
+          notyf.success("Login successful!");
+          router.push("/admindashboard");
         }
       } else {
         setError(data.message || "Login failed. Please check your credentials.");
+        notyf.error(data.message || "Login failed. Please check your credentials.");
       }
     } catch (error) {
       console.error("An error occurred:", error);
       setError("An error occurred. Please try again later.");
+      notyf.error("An error occurred. Please try again later.");
     }
   };
 
@@ -77,7 +82,7 @@ function Page() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                />
+              />
               <i
                 className={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
                 aria-hidden="true"
