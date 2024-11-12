@@ -110,7 +110,6 @@
       outline: none;
       border-radius: 30px;
       border: 1px 0px 0px 0px;
-      opacity: 0px;
       border: 1px solid #333333;
     }
     .right form button {
@@ -119,7 +118,6 @@
       padding: 9px 5px 9px 5px;
       /* gap: 10px; */
       border-radius: 30px;
-      opacity: 0px;
       background: #007BFF;
       color: white;
       border: none;
