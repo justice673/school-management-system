@@ -31,7 +31,7 @@ const CourseEditForm = () => {
 
   const fetchCourseDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/api/courses/${courseId}`);
+      const response = await axios.get(`https://school-management-system-backend-jzrj.onrender.com/api/courses/${courseId}`);
       setName(response.data.name);
       setDuration(response.data.duration);
     } catch (error) {
@@ -47,7 +47,7 @@ const CourseEditForm = () => {
     const updatedCourse = { name, duration };
 
     try {
-      const response = await axios.put(`http://localhost:3001/api/courses/${courseId}`, updatedCourse);
+      const response = await axios.put(`https://school-management-system-backend-jzrj.onrender.com/api/courses/${courseId}`, updatedCourse);
 
       if (response.status === 200) {
         notyf.success("Course updated successfully!");

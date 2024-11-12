@@ -22,7 +22,7 @@ const Page = () => {
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/api/courses");
+      const response = await axios.get("https://school-management-system-backend-jzrj.onrender.com/api/courses");
       setCourses(response.data);
     } catch (error) {
       console.error("Error fetching courses:", error);
@@ -41,7 +41,7 @@ const Page = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:3001/api/courses/${selectedCourse}`);
+      await axios.delete(`https://school-management-system-backend-jzrj.onrender.com/api/courses/${selectedCourse}`);
       setCourses(courses.filter((course) => course._id !== selectedCourse));
       closeModal();
     } catch (error) {

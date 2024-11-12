@@ -22,7 +22,7 @@ export default function Page() {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/api/students");
+      const response = await axios.get("https://school-management-system-backend-jzrj.onrender.com/api/students");
       setStudents(response.data);
     } catch (error) {
       console.error("Error fetching students:", error);
@@ -41,7 +41,7 @@ export default function Page() {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:3001/api/students/${selectedStudent}`);
+      await axios.delete(`https://school-management-system-backend-jzrj.onrender.com/api/students/${selectedStudent}`);
       setStudents(students.filter((student) => student._id !== selectedStudent));
       closeModal();
     } catch (error) {

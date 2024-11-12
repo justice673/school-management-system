@@ -22,7 +22,7 @@ function Page({ params }) {
 
     try {
       const response = await fetch(
-        `http://localhost:3001/reset/resetpassword/${token}`,
+        `https://school-management-system-backend-jzrj.onrender.com/reset/resetpassword/${token}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

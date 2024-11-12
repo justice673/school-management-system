@@ -13,7 +13,7 @@ function Page() {
 
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:3001/reset/verifyotp", {
+    const response = await fetch("https://school-management-system-backend-jzrj.onrender.com/reset/verifyotp", {
       method: "POST",
       
       headers: {

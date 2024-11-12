@@ -28,7 +28,7 @@ const StudentEditForm = () => {
 
     const fetchStudentData = async () => {
         try {
-            const response = await fetch(`http://localhost:3001/api/students/${studentId}`);
+            const response = await fetch(`https://school-management-system-backend-jzrj.onrender.com/api/students/${studentId}`);
             if (response.ok) {
                 const studentData = await response.json();
                 setName(studentData.name);
@@ -54,7 +54,7 @@ const StudentEditForm = () => {
         const updatedStudent = { name, grade, phone, address };
 
         try {
-            const response = await fetch(`http://localhost:3001/api/students/${studentId}`, {
+            const response = await fetch(`https://school-management-system-backend-jzrj.onrender.com/api/students/${studentId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(updatedStudent),

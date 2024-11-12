@@ -12,7 +12,7 @@ function Page() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:3001/reset/forgotpassword", {
+            const response = await fetch("https://school-management-system-backend-jzrj.onrender.com/reset/forgotpassword", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email })

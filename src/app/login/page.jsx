@@ -26,7 +26,7 @@ function Page() {
     console.log("Sending data:", userData); // Debug log
 
     try {
-      const response = await fetch("http://localhost:3001/auth/login", {  // Confirm the URL and port
+      const response = await fetch("https://school-management-system-backend-jzrj.onrender.com/auth/login", {  // Confirm the URL and port
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -30,7 +30,7 @@ const Page = () => {
         const newStudent = { name, grade, phone, address, email, course, enrollDate };
 
         try {
-            const response = await fetch('http://localhost:3001/api/students', {
+            const response = await fetch('https://school-management-system-backend-jzrj.onrender.com/api/students', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newStudent),
