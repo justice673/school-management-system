@@ -19,13 +19,13 @@ const EditStudentPage = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        if (studentId) {
-            fetchStudentData();
-        } else {
-            console.error("Student ID is null or undefined.");
-        }
-    }, [studentId]);
-    
+    if (studentId) {
+        fetchStudentData();
+    } else {
+        console.error("Student ID is null or undefined.");
+    }
+}, [studentId]);
+
 
     const fetchStudentData = async () => {
         try {

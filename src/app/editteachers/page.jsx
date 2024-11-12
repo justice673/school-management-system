@@ -10,10 +10,10 @@ import 'notyf/notyf.min.css';
 const EditStudentPage = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const studentId = searchParams.get("id");
+    const initialTeacherId = searchParams.get("teacherId") || "";
 
     const [name, setName] = useState("");
-    const [teacherId, setTeacherId] = useState("");
+    const [teacherId] = useState(initialTeacherId);
     const [grade, setGrade] = useState("");
     const [course, setCourse] = useState("");
     const [phone, setPhone] = useState("");
@@ -33,7 +33,7 @@ const EditStudentPage = () => {
                 const teacherData = await response.json();
                 setName(teacherData.name);
                 setGrade(teacherData.grade);
-                setCourse(teacherData.grade);
+                setCourse(teacherData.course);
                 setPhone(teacherData.phone);
                 setAddress(teacherData.address);
             } else {
@@ -52,7 +52,7 @@ const EditStudentPage = () => {
             duration: 3000
         });
 
-        const updatedTeacher = { name, grade, course, phone, address };
+        const updatedTeacher = { name, teacherId, grade, course, phone, address };
 
         try {
             const response = await fetch(`http://localhost:3001/api/teachers/${teacherId}`, {
@@ -89,7 +89,7 @@ const EditStudentPage = () => {
                         <h1>Edit Teacher</h1>
                         <div className={styles.table}>
                             <form onSubmit={handleSubmit} className={styles.form}>
-                            <label className={styles.inputStyles1}>Teacher Name</label>
+                                <label className={styles.inputStyles1}>Teacher Name</label>
                                 <input
                                     className={styles.inputStyles}
                                     type="text"
@@ -105,8 +105,7 @@ const EditStudentPage = () => {
                                     type="text"
                                     placeholder="Teacher ID"
                                     value={teacherId}
-                                    onChange={(e) => setTeacherId(e.target.value)}
-                                    disabled={isLoading}
+                                    disabled={true} 
                                     required
                                 />
                                 <label className={styles.inputStyles1}>Grade</label>
