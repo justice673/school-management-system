@@ -1,5 +1,5 @@
-"use client";
-import React, { useState, useEffect } from "react";
+'use client';
+import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./page.module.css";
 import Sidebar from "@/components/Sidebar/Sidebar";
@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import { Notyf } from "notyf";
 import 'notyf/notyf.min.css';
 
-const Page = () => {
+const StudentEditForm = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const studentId = searchParams.get("id");
@@ -19,13 +19,12 @@ const Page = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-    if (studentId) {
-        fetchStudentData();
-    } else {
-        console.error("Student ID is null or undefined.");
-    }
-}, [studentId]);
-
+        if (studentId) {
+            fetchStudentData();
+        } else {
+            console.error("Student ID is null or undefined.");
+        }
+    }, [studentId]);
 
     const fetchStudentData = async () => {
         try {
@@ -76,6 +75,61 @@ const Page = () => {
     };
 
     return (
+        <div className={styles.container}>
+            <h1>Edit Student</h1>
+            <div className={styles.table}>
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <label className={styles.inputStyles1}>Student Name</label>
+                    <input
+                        className={styles.inputStyles}
+                        type="text"
+                        placeholder="Student name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        disabled={isLoading}
+                        required
+                    />
+                    <label className={styles.inputStyles1}>Grade</label>
+                    <input
+                        className={styles.inputStyles}
+                        type="text"
+                        placeholder="Grade"
+                        value={grade}
+                        onChange={(e) => setGrade(e.target.value)}
+                        disabled={isLoading}
+                        required
+                    />
+                    <label className={styles.inputStyles1}>Phone</label>
+                    <input
+                        className={styles.inputStyles}
+                        type="number"
+                        placeholder="Phone number"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        disabled={isLoading}
+                        required
+                    />
+                    <label className={styles.inputStyles1}>Address</label>
+                    <input
+                        className={styles.inputStyles}
+                        type="text"
+                        placeholder="Address"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        disabled={isLoading}
+                        required
+                    />
+                    <button className={styles.btn} type="submit" disabled={isLoading}>
+                        {isLoading ? 'Submitting...' : 'Submit'}
+                    </button>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+const Page = () => {
+    return (
         <div className={styles.main}>
             <div className={styles.mainLeft}>
                 <Sidebar />
@@ -85,56 +139,9 @@ const Page = () => {
                     <Navbar />
                 </div>
                 <div className={styles.mainRight1}>
-                    <div className={styles.container}>
-                        <h1>Edit Student</h1>
-                        <div className={styles.table}>
-                            <form onSubmit={handleSubmit} className={styles.form}>
-                                <label className={styles.inputStyles1}>Student Name</label>
-                                <input
-                                    className={styles.inputStyles}
-                                    type="text"
-                                    placeholder="Student name"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    disabled={isLoading}
-                                    required
-                                />
-                                <label className={styles.inputStyles1}>Grade</label>
-                                <input
-                                    className={styles.inputStyles}
-                                    type="text"
-                                    placeholder="Grade"
-                                    value={grade}
-                                    onChange={(e) => setGrade(e.target.value)}
-                                    disabled={isLoading}
-                                    required
-                                />
-                                <label className={styles.inputStyles1}>Phone</label>
-                                <input
-                                    className={styles.inputStyles}
-                                    type="number"
-                                    placeholder="Phone number"
-                                    value={phone}
-                                    onChange={(e) => setPhone(e.target.value)}
-                                    disabled={isLoading}
-                                    required
-                                />
-                                <label className={styles.inputStyles1}>Address</label>
-                                <input
-                                    className={styles.inputStyles}
-                                    type="text"
-                                    placeholder="Address"
-                                    value={address}
-                                    onChange={(e) => setAddress(e.target.value)}
-                                    disabled={isLoading}
-                                    required
-                                />
-                                <button className={styles.btn} type="submit" disabled={isLoading}>
-                                    {isLoading ? 'Submitting...' : 'Submit'}
-                                </button>
-                            </form>
-                        </div>
-                    </div>
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <StudentEditForm />
+                    </Suspense>
                 </div>
             </div>
         </div>
