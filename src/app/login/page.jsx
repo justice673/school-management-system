@@ -17,16 +17,16 @@ function Page() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Reset error message before each attempt
+    setError(""); 
     const userData = {
       email,
       password,
     };
 
-    console.log("Sending data:", userData); // Debug log
+    console.log("Sending data:", userData); 
 
     try {
-      const response = await fetch("https://school-management-system-backend-jzrj.onrender.com/auth/login", {  // Confirm the URL and port
+      const response = await fetch("https://school-management-system-backend-jzrj.onrender.com/auth/login", {  
         method: "POST",
         headers: {
           "Content-Type": "application/json",
